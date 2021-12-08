@@ -25,6 +25,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
+	"docs"
 
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	cloudeventsClient "github.com/cloudevents/sdk-go/v2/client"
@@ -80,6 +81,24 @@ func handleReceivedEvent(ctx context.Context, event cloudevents.Event) {
 	} else {
 		fmt.Printf("%s\n", jsonLog)
 	}
+
+	dd := docs.readTitleAndBody("provide a doc id here. Currently hardcoded")
+
+	loggedEvent := LoggedEvent{
+		Severity:  "INFO",
+		EventType: event.Type(),
+		Message:   fmt.Sprintf("Doc read: title %s. Doc data  data: %s", dd.title, dd.content),
+		Event:     event, // Always log full event data
+	}
+	jsonLog, err := json.Marshal(loggedEvent)
+	if err != nil {
+		fmt.Printf("Unable to log event to JSON: %s\n", err.Error())
+	} else {
+		fmt.Printf("%s\n", jsonLog)
+	}
+	
+
+	
 }
 
 func getEventsHandler() *cloudeventsClient.EventReceiver {
