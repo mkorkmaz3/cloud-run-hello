@@ -25,7 +25,6 @@ import (
 	"net/http"
 	"os"
 	"regexp"
-	docReader "./docs"
 
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	cloudeventsClient "github.com/cloudevents/sdk-go/v2/client"
@@ -82,15 +81,15 @@ func handleReceivedEvent(ctx context.Context, event cloudevents.Event) {
 		fmt.Printf("%s\n", jsonLog)
 	}
 
-	dd := docReader.readTitleAndBody("provide a doc id here. Currently hardcoded")
+	dd := readTitleAndBody("provide a doc id here. Currently hardcoded")
 
-	loggedEvent := LoggedEvent{
+	loggedEvent2 := LoggedEvent{
 		Severity:  "INFO",
 		EventType: event.Type(),
 		Message:   fmt.Sprintf("Doc read: title %s. Doc data  data: %s", dd.title, dd.content),
 		Event:     event, // Always log full event data
 	}
-	jsonLog, err := json.Marshal(loggedEvent)
+	jsonLog, err := json.Marshal(loggedEvent2)
 	if err != nil {
 		fmt.Printf("Unable to log event to JSON: %s\n", err.Error())
 	} else {

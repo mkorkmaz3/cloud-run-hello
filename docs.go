@@ -1,4 +1,4 @@
-package docs 
+package main 
 
 import (
         "context"
@@ -82,6 +82,7 @@ func readBodyParagraphs(elements []*docs.StructuralElement) string{
                                 }
                         }
 	}
+}
 	return str.String()
 }
 func readTitleAndBody(docId string){
