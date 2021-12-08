@@ -83,21 +83,19 @@ func handleReceivedEvent(ctx context.Context, event cloudevents.Event) {
 
 	dd := readTitleAndBody("provide a doc id here. Currently hardcoded")
 
-	loggedEvent2 := LoggedEvent{
+	loggedEvent = LoggedEvent{
 		Severity:  "INFO",
 		EventType: event.Type(),
 		Message:   fmt.Sprintf("Doc read: title %s. Doc data  data: %s", dd.title, dd.content),
 		Event:     event, // Always log full event data
 	}
-	jsonLog, err := json.Marshal(loggedEvent2)
+	jsonLog, err = json.Marshal(loggedEvent)
 	if err != nil {
 		fmt.Printf("Unable to log event to JSON: %s\n", err.Error())
 	} else {
 		fmt.Printf("%s\n", jsonLog)
 	}
-	
 
-	
 }
 
 func getEventsHandler() *cloudeventsClient.EventReceiver {
