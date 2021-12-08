@@ -25,7 +25,7 @@ import (
 	"net/http"
 	"os"
 	"regexp"
-	"docs"
+	docReader "./docs"
 
 	cloudevents "github.com/cloudevents/sdk-go/v2"
 	cloudeventsClient "github.com/cloudevents/sdk-go/v2/client"
@@ -82,7 +82,7 @@ func handleReceivedEvent(ctx context.Context, event cloudevents.Event) {
 		fmt.Printf("%s\n", jsonLog)
 	}
 
-	dd := docs.readTitleAndBody("provide a doc id here. Currently hardcoded")
+	dd := docReader.readTitleAndBody("provide a doc id here. Currently hardcoded")
 
 	loggedEvent := LoggedEvent{
 		Severity:  "INFO",
