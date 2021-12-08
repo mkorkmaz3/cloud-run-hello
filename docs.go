@@ -13,7 +13,6 @@ import (
 	"golang.org/x/oauth2"
 	"golang.org/x/oauth2/google"
 	"google.golang.org/api/docs/v1"
-	"google.golang.org/api/docs/v1/docs"
 	"google.golang.org/api/option"
 )
 
@@ -87,7 +86,7 @@ func readBodyParagraphs(elements []*docs.StructuralElement) string {
 	}
 	return str.String()
 }
-func readTitleAndBody(docId string) {
+func readTitleAndBody(docId string) docData{
 	ctx := context.Background()
 	b, err := ioutil.ReadFile("credentials.json")
 	if err != nil {
@@ -115,4 +114,5 @@ func readTitleAndBody(docId string) {
 	dd := docData{}
 	dd.title = doc.Title
 	dd.content = readBodyParagraphs(doc.Body.Content)
+	return dd
 }
