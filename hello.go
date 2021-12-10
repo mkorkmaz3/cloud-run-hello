@@ -96,6 +96,18 @@ func handleReceivedEvent(ctx context.Context, event cloudevents.Event) {
 		fmt.Printf("%s\n", jsonLog)
 	}
 
+	numFound := dlpText(dd.content)
+
+	loggedEvent = LoggedEvent{
+		Severity:  "INFO",
+		EventType: event.Type(),
+		Message:   fmt.Sprintf("Number of DLP findings: %s", numFound),
+		Event:     event, // Always log full event data
+	}
+	jsonLog, err = json.Marshal(loggedEvent)
+
+
+
 }
 
 func getEventsHandler() *cloudeventsClient.EventReceiver {

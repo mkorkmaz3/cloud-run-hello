@@ -10,3 +10,5 @@ It also contains the source code of a placeholder public container
 Continuous Deployment.
 
 [![Run on Google Cloud](https://deploy.cloud.run/button.svg)](https://deploy.cloud.run)
+
+NOTE: Requires credentials.json and token.json
